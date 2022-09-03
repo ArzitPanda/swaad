@@ -1,0 +1,89 @@
+SELECT
+*
+from
+cart
+INNER JOIN
+products
+ON
+products.product_id=cart.produt_id
+INNER JOIN
+buyer
+ON
+cart.buyer_id=buyer.buyerId
+WHERE
+cart.buyer_id=1;
+
+
+SELECT * FROM swaad.seller
+WHERE
+FLOOR(pincode/10)=75301;
+
+
+
+SELECT * FROM products
+INNER JOIN
+seller
+ON
+products.seller_id=seller.sellid
+WHERE
+FLOOR(pincode/10)=75301;
+
+
+
+
+SELECT * FROM products
+INNER JOIN
+seller
+ON
+products.seller_id=seller.sellid
+WHERE
+seller.sellid=1;
+
+
+
+SELECT EXISTS(SELECT * FROM cart WHERE produt_id=8 AND buyer_id=1);
+
+UPDATE cart
+SET
+quantity=quantity+1
+WHERE
+produt_id=8 AND buyer_id=1; 
+
+
+
+
+SELECT EXISTS(SELECT * FROM cart WHERE produt_id=8 AND buyer_id=1);
+
+UPDATE cart
+SET
+quantity=quantity-1
+WHERE
+produt_id=8 AND buyer_id=1; 
+
+DELETE from cart WHERE produt_id=8 AND buyer_id=1; 
+
+
+
+DELETE FROM cart WHERE buyer_id=1;
+insert INTO cart (produt_id,buyer_id) values($product_id,$buyer_id); 
+
+UPDATE orders
+SET 
+status_order=2
+WHERE
+buyer_id=2 AND status_order<4;
+
+
+
+
+SELECT  * FROM orders
+INNER JOIN
+products
+ON
+orders.product_id=products.product_id
+INNER JOIN
+buyer
+ON
+orders.buyer_id=buyer.buyerId
+WHERE
+products.seller_id=1;
