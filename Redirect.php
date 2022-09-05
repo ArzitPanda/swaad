@@ -26,7 +26,7 @@ if($res)
 echo "added ";
 
 }
-+
+
 $sql_delete="DELETE FROM cart WHERE buyer_id='$user'";
 $res=$conn->query($sql_delete);
 

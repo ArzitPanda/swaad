@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
-<body>
-    
+
+<body class="flex flex-col items-center justify-start h-screen bg-gray-900 w-screen gap-y-32">
+<?php include('../components/NavbarSeller.php'); ?>
 <?php
 session_start();
 $servername = "localhost";
@@ -93,8 +95,8 @@ header("seller.php",true);
 
 ?>
 
-
-        <form action="" method="POST">
+<div class="flex items-center justify-between gap-2">
+        <form action="" method="POST" class="flex flex-col max-w-md gap-3 p-6 rounded-md shadow-md bg-white dark:text-gray-100">
 
                 <input type="text" name="shop_name" placeholder="enter your shop name"></input>
                 <input type="text" name="shop_add" placeholder="enter your shop full address"></input>
@@ -106,9 +108,10 @@ header("seller.php",true);
 
         </form>
 
-
-        <form action="" method="post" >
-
+<div>
+  <h3 class="mx-auto">Login</h3>
+        <form action="" method="post" class="flex flex-col max-w-md gap-3 p-6 rounded-md shadow-md bg-white dark:text-gray-100">
+        
 
         <input type="text" name="shop_email" placeholder="enter your email"></input>
 
@@ -117,7 +120,8 @@ header("seller.php",true);
 
 
         </form>
-
+        </div>
+        </div>
 
 
 </body>

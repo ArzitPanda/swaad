@@ -10,6 +10,7 @@
 
 
 <?php 
+error_reporting(0);
     include('config.php');
 $pin=$_SESSION['userPin'];
 $pin_mod=substr($pin,0,5);
@@ -99,16 +100,26 @@ if(isset($_POST['ADD_TO_CART']))
 
 
 
-
+include("./components/Navbar.php");
 
 ?>
 
+<section>
+	<div class="bg-violet-400">
+		<div class="container flex flex-col items-center px-4 py-16 pb-24 mx-auto text-center lg:pb-56 md:py-32 md:px-10 lg:px-32 text-gray-900">
+			<h1 class="text-5xl font-bold leading-none sm:text-6xl xl:max-w-3xl text-gray-900">Explore amazing food product</h1>
+			<p class="mt-6 mb-8 text-lg sm:mb-12 xl:max-w-3xl text-gray-900">umm kill the hunger by ordering some food</p>
+			<div class="flex flex-wrap justify-center">
+				<button type="button" class="px-8 py-3 m-2 text-lg font-semibold rounded bg-gray-800 text-gray-50">Order Now</button>
+				<button type="button" class="px-8 py-3 m-2 text-lg border rounded border-gray-700 text-gray-900">Explore</button>
+			</div>
+		</div>
+	</div>
+	<img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="" class="w-3/6 object-contain mx-auto mb-12 -mt-20 rounded-lg shadow-md lg:-mt-40 bg-gray-500">
+</section>
 
     <nav>
-        <div class="flex items-center justify-between w-1/5">
-            <svg class="w-10 h-10 object-contain" viewBox="0 0 559 825" height="49" width="34" fill="#fc8019"><path fill-rule="evenodd" clip-rule="evenodd" d="M542.92 388.542C546.805 366.526 542.355 349.598 530.881 340.76C513.621 327.466 487.698 320.236 425.954 320.236C380.271 320.236 331.225 320.286 310.268 320.275C308.322 319.894 301.285 317.604 301.02 309.112L300.734 174.289C300.727 165.779 307.531 158.857 315.943 158.839C324.369 158.825 331.204 165.723 331.211 174.226C331.211 174.226 331.421 247.414 331.441 273.424C331.441 275.936 332.892 281.8 338.549 283.328C375.43 293.267 561.865 285.999 558.967 251.804C543.147 109.96 424.476 0 280.394 0C235.021 0 192.065 10.9162 154.026 30.2754C62.9934 77.5955 -1.65904 173.107 0.0324268 283.43C1.23215 361.622 52.2203 500.605 83.434 521.234C97.8202 530.749 116.765 527.228 201.484 527.228C239.903 527.228 275.679 527.355 293.26 527.436C295.087 527.782 304.671 530.001 304.671 538.907L304.894 641.393C304.915 649.907 298.104 656.826 289.678 656.829C281.266 656.843 274.434 649.953 274.42 641.446C274.42 641.446 275.17 600.322 275.17 584.985C275.17 581.435 275.424 575.339 265.178 570.727C231.432 555.553 121.849 564.712 115.701 581.457C113.347 587.899 125.599 612.801 144.459 644.731C170.102 685.624 211.889 747.245 245.601 792.625C261.047 813.417 268.77 823.813 280.467 824.101C292.165 824.389 300.514 814.236 317.213 793.928C383.012 713.909 516.552 537.663 542.92 388.542Z" fill="url(#paint0_linear_19447_66107)"></path><defs><linearGradient id="paint0_linear_19447_66107" x1="445.629" y1="63.8626" x2="160.773" y2="537.598" gradientUnits="userSpaceOnUse"><stop stop-color="#FF993A"></stop><stop offset="1" stop-color="#F15700"></stop></linearGradient></defs></svg>
-            <div class="flex text-3xl items-center">your address</div>
-    </div>
+    <h1 class="text-xl font-bold leading-none sm:text-3xl xl:max-w-xl text-center text-white mx-auto bg-slate-900 rounded mb-2">Try now</h1>
     <?php 
     
         $query="SELECT * FROM products
@@ -122,49 +133,44 @@ if(isset($_POST['ADD_TO_CART']))
 
         $result=$conn->query($query);
     // print_r($result);
+
+
+    echo '<div class="flex w-4/5 mx-auto py-5 flex-wrap flex-row gap-6 p-x-3 bg-slate-300 items-center justify-around ">';
+    
     foreach ($result as $row)
     {
+
+        // $print_r($row);
         ?>    
 
-<div class="shadow-sm flex items-center justify-center border-2 flex-col">
+<div class="shadow-sm flex items-center justify-center border-2 flex-col w-1/5 ">
     <a href=<?php echo "product.php?id=".$row['product_id']; ?>>
-<div>
-        <?php
-        echo $row['product_name'];
+    <div class="max-w-xs rounded-md shadow-md bg-gray-900 text-gray-100">
+	<img src="<?php echo $row['imgLink'] ?>" alt="" class="object-cover object-center w-full rounded-t-md h-36 bg-gray-500">
+	<div class="flex flex-col justify-between p-6 space-y-8">
+		<div class="space-y-2">
+			<h2 class="text-xl font-semibold tracking-wide"><?php
+        echo $row['product_name']." ".$row['shopname'];
         
-        ?>
-</div>
-
-<div>
-        <?php
+        ?></h2>
+			<p class="text-gray-100">₹<?php
         echo $row['product_price'];
         
-        ?>
-</div>
-
-<div>
-        <?php
-        echo $row['shopname'];
-        
-        ?>
+        ?></p>
+		</div>
+		
+	</div>
 </div>
 
 <form action="" method="POST">
-        <button type="submit" name="ADD_TO_CART" value="add_to_cart" class="bg-slate-800 text-white">add to cart</button>
+        <button type="submit" name="ADD_TO_CART"  value="add_to_cart" class="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md  addtocart bg-violet-400 text-gray-900">add to cart</button>
         <input type="hidden" name="user" value=<?php echo $_SESSION['userId'];?> />
         <input type="hidden" name="product" value=<?php echo  $row['product_id']?> />
         <input type="hidden" name="seller_id" value=<?php echo  $row['seller_id']?> />
 
 
 </form>
-<form action="product.php" method="POST">
-        <button type="submit" name="visit" value="add_to_cart" class="bg-red-800 text-white">visit</button>
-        <input type="hidden" name="user" value=<?php echo $_SESSION['userId'];?> />
-        <input type="hidden" name="product" value=<?php echo  $row['product_id']?> />
-        <input type="hidden" name="seller_id" value=<?php echo  $row['seller_id']?> />
 
-
-</form>
 
     </a>
 
@@ -175,6 +181,7 @@ if(isset($_POST['ADD_TO_CART']))
 
      <?php 
     }
+    echo "</div>";
     ?>
 
     </nav>
